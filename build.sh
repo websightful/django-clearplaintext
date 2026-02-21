@@ -23,6 +23,6 @@ echo "Bumping version to $bump_type..."
 bump-my-version bump $bump_type
 
 echo "Building source distribution and wheel..."
-python3 setup.py sdist bdist_wheel
+python3 -m build
 
 echo "Build complete!"
