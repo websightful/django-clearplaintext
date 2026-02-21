@@ -1,14 +1,7 @@
 build
-bump-my-version
-click
 packaging
-prompt_toolkit
 pyproject-hooks
-rich_click
 setuptools
-questionary
-tomlkit
 tox
 twine
 uv
-wcwidth
