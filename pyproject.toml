@@ -1,9 +1,30 @@
 [project]
 name = "django-clearplaintext"
 version = "1.0.0"
+authors = [
+    { name="Aidas Bendoraitis", email="aidas.bendoraitis@websightful.co" },
+]
+description = "Django template filter for cleaning up whitespace in plain text"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+]
+license = "MIT"
+licence-files = ["LICEN[CS]E*"]
 dependencies = [
     "Django>=4.2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/websightful/django-clearplaintext"
+Issues = "https://github.com/websightful/django-clearplaintext/issues"
 
 [tool.bumpversion]
 current_version = "1.0.0"
@@ -46,5 +67,5 @@ replace = '''## [Unreleased]
 ## [v{new_version}] - {utcnow:%Y-%m-%d}'''
 
 [build-system]
-requires = ["setuptools>=61"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build >= 0.10.0, <0.11.0"]
+build-backend = "uv_build"
