@@ -3,6 +3,7 @@ bump-my-version
 packaging
 prompt_toolkit
 pyproject-hooks
+rich_click
 setuptools
 questionary
 tox
