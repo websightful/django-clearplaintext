@@ -38,11 +38,6 @@ search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
 
 [[tool.bumpversion.files]]
-filename = "README.md"
-search = 'clearplaintext-{current_version}-py3-none-any.whl'
-replace = 'clearplaintext-{new_version}-py3-none-any.whl'
-
-[[tool.bumpversion.files]]
 filename = "CHANGELOG.md"
 search = '## [Unreleased]'
 replace = '''## [Unreleased]
