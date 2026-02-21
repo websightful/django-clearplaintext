@@ -61,3 +61,16 @@ Best regards,\n
         )
 
         self.assertEqual(rendered, expected)
+
+    def test_keep_whitespace_with_clean_plaintext(self):
+        template_string = "{% load clearplaintext_filters %}{% filter clean_plaintext %}{{ value|keep_whitespace }}{% endfilter %}"
+
+        template = Template(template_string)
+
+        context = Context({"value": "Hello,\n\nThis has\treal whitespace.  \n"})
+
+        rendered = template.render(context)
+
+        expected = "Hello,\n\nThis has\treal whitespace.  \n"
+
+        self.assertEqual(rendered, expected)

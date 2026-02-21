@@ -1,6 +1,6 @@
 # django-clearplaintext
 
-Provides a Django template filter that normalizes plain text while allowing explicit whitespace control.
+Provides Django template filters that normalize plain text while allowing explicit whitespace control.
 
 It collapses excessive whitespace but preserves intentional formatting using escaped sequences like `\n`, `\t`, and `\s`.
 
@@ -15,7 +15,7 @@ Perfect for:
 
 ## ✨ What It Does
 
-The `clean_plaintext` filter:
+### `clean_plaintext`
 
 * Collapses multiple spaces into a single space
 * Limits consecutive blank lines to a maximum of two
@@ -29,8 +29,17 @@ The `clean_plaintext` filter:
 
 This allows you to write readable Django templates while still controlling whitespace precisely.
 
-## 📦 Installation
+### `keep_whitespace`
 
+Escapes real whitespace characters in a value so they survive `clean_plaintext` normalization:
+
+* `\n` → `\n` (literal)
+* `\t` → `\t` (literal)
+* ` ` → `\s` (literal)
+
+Use this when passing database values or dynamic content that contains meaningful whitespace into a `clean_plaintext` block.
+
+## 📦 Installation
 ```bash
 pip install django-clearplaintext
 ```
@@ -38,7 +47,6 @@ pip install django-clearplaintext
 ## 🔧 Setup
 
 Add it to your Django project:
-
 ```python
 INSTALLED_APPS = [
     ...
@@ -48,16 +56,14 @@ INSTALLED_APPS = [
 
 ## 🚀 Usage
 
-### Input
-
 Load the template tag:
-
 ```django
 {% load clearplaintext_filters %}
 ```
 
-Use it as a filter block:
+### `clean_plaintext` — template block formatting
 
+Use it as a filter block to normalize whitespace in your template while keeping explicit escape sequences:
 ```django
 {% filter clean_plaintext %}
 Hello {{ user.get_full_name }},\n
@@ -73,19 +79,28 @@ Best regards,\n
 {% endfilter %}
 ```
 
-### Output
-
+Output:
 ```
 Hello John Smith,
 
 Your order has been confirmed.
-Items:
     - Widget (2x)
     - Gadget (1x)
 
 Best regards,
 Acme Inc.
 ```
+
+### `keep_whitespace` — preserving whitespace from dynamic values
+
+When a variable comes from the database and already contains meaningful whitespace, pipe it through `keep_whitespace` before passing it into a `clean_plaintext` block:
+```django
+{% filter clean_plaintext %}
+{{ post.content|keep_whitespace }}
+{% endfilter %}
+```
+
+This ensures that real newlines, tabs, and spaces in the value are escaped before normalization runs, so they are restored correctly in the output rather than being collapsed.
 
 ## 🎯 Why Use This?
 
@@ -120,14 +135,13 @@ It is especially useful for plain-text emails where formatting matters.
 | `\t`     | Tab          |
 | `\s`     | Single space |
 
-Escaped sequences are protected during normalization and restored afterward.
+Escaped sequences are protected during normalization and restored afterward. The `keep_whitespace` filter converts real whitespace into these sequences so that dynamic values receive the same treatment.
 
 ## 🧪 Testing
 
 The package is tested against multiple Django versions using `tox`.
 
 To run tests locally:
-
 ```bash
 tox
 ```

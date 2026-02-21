@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo "Did you run tests with tox? (y/N)"
+read answer
+
+if [[ $answer != "y" && $answer != "Y" ]]; then
+echo "Please make sure tests pass before building."
+exit 1
+fi
+
 echo "Did you update the CHANGELOG.md and commit the changes? (y/N)"
 read answer
 

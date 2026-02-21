@@ -41,3 +41,15 @@ def clean_plaintext(value):
     value = re.sub(r"(?<=[\n\t])\s+(?=[\n\t])", "", value)
 
     return value
+
+
+@register.filter(name="keep_whitespace")
+def keep_whitespace(value):
+    if not isinstance(value, str):
+        return value
+
+    value = value.replace("\n", r"\n")
+    value = value.replace("\t", r"\t")
+    value = value.replace(" ", r"\s")
+
+    return value
