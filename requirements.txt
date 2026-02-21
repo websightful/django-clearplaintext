@@ -1,5 +1,6 @@
 build
 bump-my-version
+click
 packaging
 prompt_toolkit
 pyproject-hooks
