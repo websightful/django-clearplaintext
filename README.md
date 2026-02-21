@@ -66,41 +66,31 @@ Use it as a filter block:
 
 ```django
 {% filter clean_plaintext %}
-Hello {{ user.name }},\n
+Hello {{ user.get_full_name }},\n
 
 Your order has been confirmed.\n
-\t- Item A (2x)\n
-\t- Item B (1x)\n
+{% for item in order.items %}
+    \t- {{ item.name }} ({{ item.quantity }}x)\n
+    {% if not forloop.last %}\n{% endif %}
+{% endfor %}
 
 Best regards,\n
 {{ company.name }}
 {% endfilter %}
 ```
 
----
-
-## 📝 Example
-
-### Template Input
-
-```django
-{% filter clean_plaintext %}
-Hi {{ user.name }},
-
-Your order #{{ order.id }} has been confirmed.\n
-Items:\n
-\t- {{ item.name }} ({{ item.quantity }}x)\n
-{% endfilter %}
-```
-
 ### Output
 
 ```
-Hi John,
+Hello John Smith,
 
-Your order #123 has been confirmed.
+Your order has been confirmed.
 Items:
     - Widget (2x)
+    - Gadget (1x)
+
+Best regards,
+Acme Inc.
 ```
 
 ---
