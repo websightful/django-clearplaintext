@@ -1,5 +1,5 @@
 build
-bump-my-version
+bump-my-version[cli]
 setuptools
 tox
 twine
