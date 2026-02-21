@@ -1,6 +1,6 @@
 [project]
 name = "django-clearplaintext"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
     { name="Aidas Bendoraitis", email="aidas.bendoraitis@websightful.co" },
 ]
@@ -27,7 +27,7 @@ Homepage = "https://github.com/websightful/django-clearplaintext"
 Issues = "https://github.com/websightful/django-clearplaintext/issues"
 
 [tool.bumpversion]
-current_version = "1.0.1"
+current_version = "1.0.2"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 search = "{current_version}"
