@@ -65,7 +65,7 @@ Hello {{ user.get_full_name }},\n
 Your order has been confirmed.\n
 {% for item in order.items %}
     \t- {{ item.name }} ({{ item.quantity }}x)\n
-    {% if not forloop.last %}\n{% endif %}
+    {% if forloop.last %}\n{% endif %}
 {% endfor %}
 
 Best regards,\n
