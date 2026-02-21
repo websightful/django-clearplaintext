@@ -1,6 +1,7 @@
 build
 bump-my-version
 packaging
+prompt_toolkit
 pyproject-hooks
 setuptools
 questionary
