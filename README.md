@@ -13,8 +13,6 @@ Perfect for:
 * Markdown templates
 * Structured text blocks inside Django templates
 
----
-
 ## ✨ What It Does
 
 The `clean_plaintext` filter:
@@ -31,15 +29,11 @@ The `clean_plaintext` filter:
 
 This allows you to write readable Django templates while still controlling whitespace precisely.
 
----
-
 ## 📦 Installation
 
 ```bash
 pip install django-clearplaintext
 ```
-
----
 
 ## 🔧 Setup
 
@@ -52,9 +46,9 @@ INSTALLED_APPS = [
 ]
 ```
 
----
-
 ## 🚀 Usage
+
+### Input
 
 Load the template tag:
 
@@ -93,8 +87,6 @@ Best regards,
 Acme Inc.
 ```
 
----
-
 ## 🎯 Why Use This?
 
 Django templates often produce messy whitespace because of:
@@ -112,8 +104,6 @@ This filter lets you:
 
 It is especially useful for plain-text emails where formatting matters.
 
----
-
 ## 🧠 Design Philosophy
 
 * Minimal
@@ -121,8 +111,6 @@ It is especially useful for plain-text emails where formatting matters.
 * Focused on plain text formatting
 * Safe and predictable behavior
 * Suitable for reusable Django apps
-
----
 
 ## 🔍 Escaped Sequences Supported
 
@@ -134,8 +122,6 @@ It is especially useful for plain-text emails where formatting matters.
 
 Escaped sequences are protected during normalization and restored afterward.
 
----
-
 ## 🧪 Testing
 
 The package is tested against multiple Django versions using `tox`.
@@ -145,8 +131,6 @@ To run tests locally:
 ```bash
 tox
 ```
-
----
 
 ## 📄 License
 
