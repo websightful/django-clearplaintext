@@ -1,6 +1,9 @@
 build
-bump-my-version[cli]
+bump-my-version
+packaging
+pyproject-hooks
 setuptools
+questionary
 tox
 twine
 uv
