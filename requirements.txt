@@ -8,3 +8,4 @@ questionary
 tox
 twine
 uv
+wcwidth
