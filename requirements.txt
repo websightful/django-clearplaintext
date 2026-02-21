@@ -1,7 +1,17 @@
 build
+certifi
+charset-normalizer
+id
+idna
 packaging
+pygments
 pyproject-hooks
+requests
+requests_toolbelt
+rfc3986
+rich
 setuptools
 tox
 twine
+urllib3
 uv
