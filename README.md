@@ -113,7 +113,15 @@ Use this utility function when you want to render a template and get clean plain
 ```python
 from clearplaintext.utils import render_to_plaintext
 
-body = render_to_plaintext("emails/order_confirmed.txt", {"order": order}, request=request)
+body = render_to_plaintext(
+    "emails/order_confirmed.txt", 
+    {
+        "user": user,
+        "order": order,
+        "company": company,
+    }, 
+    request=request
+)
 ```
 
 It accepts the same arguments as Django's `render_to_string` and applies `clean_plaintext` normalization to the result.
