@@ -15,6 +15,10 @@ Perfect for:
 
 ## What It Does
 
+### `render_to_plaintext`
+
+A utility function that renders a Django template to a string and then applies `clean_plaintext` normalization to the result. It accepts the same arguments as Django's `render_to_string`.
+
 ### `clean_plaintext`
 
 * Collapses multiple spaces into a single space
@@ -101,6 +105,33 @@ When a variable comes from the database and already contains meaningful whitespa
 ```
 
 This ensures that real newlines, tabs, and spaces in the value are escaped before normalization runs, so they are restored correctly in the output rather than being collapsed.
+
+### `render_to_plaintext` — rendering templates directly from Python
+
+Use this utility function when you want to render a template and get clean plain text back in a single call, for example when sending plain-text emails from a view or task:
+
+```python
+from clearplaintext.utils import render_to_plaintext
+
+body = render_to_plaintext("emails/order_confirmed.txt", {"order": order}, request=request)
+```
+
+It accepts the same arguments as Django's `render_to_string` and applies `clean_plaintext` normalization to the result.
+
+The template itself uses the same escaped sequences as the filter:
+
+```
+Hi {{ user.get_full_name }},\n\n
+
+Your order #{{ order.id }} has been confirmed.\n
+{% for item in order.items %}
+    \t- {{ item.name }} ({{ item.quantity }}x)\n
+    {% if forloop.last %}\n{% endif %}
+{% endfor %}
+
+Best regards,\n
+{{ company.name }}
+```
 
 ## Why Use This?
 

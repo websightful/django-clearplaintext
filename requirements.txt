@@ -3,6 +3,7 @@ cachetools==7.0.1
 certifi==2026.1.4
 chardet==5.2.0
 colorama==0.4.6
+Django==6.0.2
 distlib==0.4.0
 filelock==3.24.3
 id==1.6.1

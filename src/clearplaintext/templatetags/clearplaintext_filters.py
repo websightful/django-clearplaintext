@@ -1,4 +1,3 @@
-import re
 from django import template
 
 register = template.Library()
@@ -6,45 +5,26 @@ register = template.Library()
 
 @register.filter(name="clean_plaintext")
 def clean_plaintext(value):
-    if not isinstance(value, str):
-        return value
+    """Normalize whitespace in a template block.
 
-    # Replace escaped sequences with unique placeholders
-    escaped_chars = {
-        r"\n": "\n",
-        r"\t": "\t",
-        r"\s": " ",
-    }
+    Collapses real whitespace to a single space while converting escaped
+    sequences (``\\n``, ``\\t``, ``\\s``) into their actual characters. Use as
+    a ``{% filter clean_plaintext %}`` block around template content.
+    """
+    from clearplaintext.utils import clean_plaintext as _clean_plaintext
 
-    for idx, (esc, char) in enumerate(list(escaped_chars.items())):
-        placeholder = f"\x01{idx}\x01"
-        value = value.replace(esc, placeholder)
-        escaped_chars[placeholder] = char
-
-    # Collapse real whitespace in non-placeholder segments
-    placeholders = [p for p in escaped_chars if p.startswith("\x01")]
-    escaped_placeholders = map(re.escape, placeholders)
-    pattern = f"({'|'.join(escaped_placeholders)})"
-
-    parts = re.split(pattern, value)
-    value = "".join(
-        part if part in placeholders else re.sub(r"\s+", " ", part).strip()
-        for part in parts
-    )
-
-    # Restore placeholders
-    for ph, char in escaped_chars.items():
-        if ph.startswith("\x01"):
-            value = value.replace(ph, char)
-
-    # Remove whitespace between control characters (\n, \t)
-    value = re.sub(r"(?<=[\n\t])\s+(?=[\n\t])", "", value)
-
-    return value
+    return _clean_plaintext(value)
 
 
 @register.filter(name="keep_whitespace")
 def keep_whitespace(value):
+    """Escape real whitespace in a value so it survives ``clean_plaintext``.
+
+    Converts newlines to ``\\n``, tabs to ``\\t``, and spaces to ``\\s``.
+    Apply this filter to dynamic values (e.g. from the database) before they
+    enter a ``clean_plaintext`` block to prevent their whitespace from being
+    collapsed.
+    """
     if not isinstance(value, str):
         return value
 
