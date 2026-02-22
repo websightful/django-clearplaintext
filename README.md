@@ -44,7 +44,7 @@ Use this when passing database values or dynamic content that contains meaningfu
 pip install django-clearplaintext
 ```
 
-## 🔧 Setup
+## Setup
 
 Add it to your Django project:
 ```python
