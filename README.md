@@ -70,7 +70,7 @@ Load the template tag:
 Use it as a filter block to normalize whitespace in your template while keeping explicit escape sequences:
 ```django
 {% filter clean_plaintext %}
-Hello {{ user.get_full_name }},\n
+Hello {{ user.get_full_name }},\n\n
 
 Your order has been confirmed.\n
 {% for item in order.items %}
