@@ -9,7 +9,7 @@ def clean_plaintext(value):
     if not isinstance(value, str):
         return value
 
-    # 1️⃣ Replace escaped sequences with unique placeholders
+    # Replace escaped sequences with unique placeholders
     escaped_chars = {
         r"\n": "\n",
         r"\t": "\t",
@@ -21,7 +21,7 @@ def clean_plaintext(value):
         value = value.replace(esc, placeholder)
         escaped_chars[placeholder] = char
 
-    # 2️⃣ Collapse real whitespace in non-placeholder segments
+    # Collapse real whitespace in non-placeholder segments
     placeholders = [p for p in escaped_chars if p.startswith("\x01")]
     escaped_placeholders = map(re.escape, placeholders)
     pattern = f"({'|'.join(escaped_placeholders)})"
@@ -32,12 +32,12 @@ def clean_plaintext(value):
         for part in parts
     )
 
-    # 3️⃣ Restore placeholders
+    # Restore placeholders
     for ph, char in escaped_chars.items():
         if ph.startswith("\x01"):
             value = value.replace(ph, char)
 
-    # 4️⃣ Remove whitespace between control characters (\n, \t)
+    # Remove whitespace between control characters (\n, \t)
     value = re.sub(r"(?<=[\n\t])\s+(?=[\n\t])", "", value)
 
     return value

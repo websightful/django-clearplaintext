@@ -13,7 +13,7 @@ Perfect for:
 * Markdown templates
 * Structured text blocks inside Django templates
 
-## ✨ What It Does
+## What It Does
 
 ### `clean_plaintext`
 
@@ -39,7 +39,7 @@ Escapes real whitespace characters in a value so they survive `clean_plaintext` 
 
 Use this when passing database values or dynamic content that contains meaningful whitespace into a `clean_plaintext` block.
 
-## 📦 Installation
+## Installation
 ```bash
 pip install django-clearplaintext
 ```
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-## 🚀 Usage
+## Usage
 
 Load the template tag:
 ```django
@@ -102,7 +102,7 @@ When a variable comes from the database and already contains meaningful whitespa
 
 This ensures that real newlines, tabs, and spaces in the value are escaped before normalization runs, so they are restored correctly in the output rather than being collapsed.
 
-## 🎯 Why Use This?
+## Why Use This?
 
 Django templates often produce messy whitespace because of:
 
@@ -119,7 +119,7 @@ This filter lets you:
 
 It is especially useful for plain-text emails where formatting matters.
 
-## 🧠 Design Philosophy
+## Design Philosophy
 
 * Minimal
 * No external dependencies
@@ -127,7 +127,7 @@ It is especially useful for plain-text emails where formatting matters.
 * Safe and predictable behavior
 * Suitable for reusable Django apps
 
-## 🔍 Escaped Sequences Supported
+## Escaped Sequences Supported
 
 | Sequence | Result       |
 | -------- | ------------ |
@@ -137,7 +137,14 @@ It is especially useful for plain-text emails where formatting matters.
 
 Escaped sequences are protected during normalization and restored afterward. The `keep_whitespace` filter converts real whitespace into these sequences so that dynamic values receive the same treatment.
 
-## 🧪 Testing
+## `django-clearplaintext` in Production
+
+`django-clearplaintext` is used in production at
+
+- [1st things 1st](https://1st-things-1st.com)
+- [Remember Your People](https://remember-your-people.app)
+
+## Testing
 
 The package is tested against multiple Django versions using `tox`.
 
@@ -146,6 +153,6 @@ To run tests locally:
 tox
 ```
 
-## 📄 License
+## License
 
 MIT License
