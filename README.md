@@ -141,7 +141,7 @@ Escaped sequences are protected during normalization and restored afterward. The
 
 `django-clearplaintext` is used in production at
 
-- [1st things 1st](https://1st-things-1st.com)
+- [1st things 1st](https://www.1st-things-1st.com)
 - [Remember Your People](https://remember-your-people.app)
 
 ## Testing
