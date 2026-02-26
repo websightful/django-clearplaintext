@@ -15,11 +15,11 @@ Perfect for:
 
 ## What It Does
 
-### `render_to_plaintext`
+### `render_to_plaintext` — utility function 
 
-A utility function that renders a Django template to a string and then applies `clean_plaintext` normalization to the result. It accepts the same arguments as Django's `render_to_string`.
+Renders a Django template to a string and then applies `clean_plaintext` normalization to the result. It accepts the same arguments as Django's `render_to_string`.
 
-### `clean_plaintext`
+### `clean_plaintext` — template filter
 
 * Collapses multiple spaces into a single space
 * Limits consecutive blank lines to a maximum of two
@@ -33,7 +33,7 @@ A utility function that renders a Django template to a string and then applies `
 
 This allows you to write readable Django templates while still controlling whitespace precisely.
 
-### `keep_whitespace`
+### `keep_whitespace` — template filter
 
 Escapes real whitespace characters in a value so they survive `clean_plaintext` normalization:
 
