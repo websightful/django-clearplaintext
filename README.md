@@ -22,32 +22,49 @@ Django templates often produce messy whitespace because of:
 * Readability formatting
 * Multi-line template blocks
 
-Look at this ugly plain-text template:
+Let's say you want plain-text output like this:
+
+```
+Hello Jane Doe,
+
+Your order has been confirmed.
+	- T-Shirt (2x)
+	  Note: Size L
+	- Mug (1x)
+
+Discount applied: 10%
+Best regards,
+Acme Co.
+```
+
+Look at this ugly template you would need to create without __django-clearplaintext__:
 
 ```django
 Hello {{ user.get_full_name }},
 
 Your order has been confirmed.
-{% for item in order.items %}    - {{ item.name }} ({{ item.quantity }}x)
-{% if item.note %}    Note: {{ item.note }}
+{% for item in order.items %}	- {{ item.name }} ({{ item.quantity }}x)
+{% if item.note %}	  Note: {{ item.note }}
 {% endif %}{% endfor %}{% if order.discount %}
 Discount applied: {{ order.discount }}
 {% endif %}Best regards,
 {{ company.name }}
 ```
 
-Here's how things can be improved for readability:
+Here's how things can be improved for developer experience:
 
 ```django
 {% filter clean_plaintext %}
     Hello {{ user.get_full_name }},\n\n
+
     Your order has been confirmed.\n
     {% for item in order.items %}
         \t- {{ item.name }} ({{ item.quantity }}x)\n
         {% if item.note %}
-            \tNote: {{ item.note }}\n
+            \t  Note: {{ item.note }}\n
         {% endif %}
     {% endfor %}
+
     {% if order.discount %}
         Discount applied: {{ order.discount }}\n
     {% endif %}
@@ -71,6 +88,16 @@ It is especially useful for plain-text emails where formatting matters.
 * Focused on plain text formatting
 * Safe and predictable behavior
 * Suitable for reusable Django apps
+
+## Escaped Sequences Supported
+
+| Sequence | Result       |
+| -------- | ------------ |
+| `\n`     | Newline      |
+| `\t`     | Tab          |
+| `\s`     | Single space |
+
+Escaped sequences are protected during normalization and restored afterward. The `keep_whitespace` filter converts real whitespace into these sequences so that dynamic values receive the same treatment.
 
 ## What It Does
 
@@ -199,16 +226,6 @@ Your order #{{ order.id }} has been confirmed.\n
 Best regards,\n
 {{ company.name }}
 ```
-
-## Escaped Sequences Supported
-
-| Sequence | Result       |
-| -------- | ------------ |
-| `\n`     | Newline      |
-| `\t`     | Tab          |
-| `\s`     | Single space |
-
-Escaped sequences are protected during normalization and restored afterward. The `keep_whitespace` filter converts real whitespace into these sequences so that dynamic values receive the same treatment.
 
 ## `django-clearplaintext` in Production
 
