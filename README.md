@@ -13,6 +13,65 @@ Perfect for:
 * Markdown templates
 * Structured text blocks inside Django templates
 
+## Why Use This?
+
+Django templates often produce messy whitespace because of:
+
+* Template indentation
+* Conditionals and loops
+* Readability formatting
+* Multi-line template blocks
+
+Look at this ugly plain-text template:
+
+```django
+Hello {{ user.get_full_name }},
+
+Your order has been confirmed.
+{% for item in order.items %}    - {{ item.name }} ({{ item.quantity }}x)
+{% if item.note %}    Note: {{ item.note }}
+{% endif %}{% endfor %}{% if order.discount %}
+Discount applied: {{ order.discount }}
+{% endif %}Best regards,
+{{ company.name }}
+```
+
+Here's how things can be improved for readability:
+
+```django
+{% filter clean_plaintext %}
+    Hello {{ user.get_full_name }},\n\n
+    Your order has been confirmed.\n
+    {% for item in order.items %}
+        \t- {{ item.name }} ({{ item.quantity }}x)\n
+        {% if item.note %}
+            \tNote: {{ item.note }}\n
+        {% endif %}
+    {% endfor %}
+    {% if order.discount %}
+        Discount applied: {{ order.discount }}\n
+    {% endif %}
+    Best regards,\n
+    {{ company.name }}
+{% endfilter %}
+```
+
+This filter lets you:
+
+* Keep templates readable
+* Avoid ugly output formatting
+* Still control exact whitespace when needed
+
+It is especially useful for plain-text emails where formatting matters.
+
+## Design Philosophy
+
+* Minimal
+* No external dependencies
+* Focused on plain text formatting
+* Safe and predictable behavior
+* Suitable for reusable Django apps
+
 ## What It Does
 
 ### `render_to_plaintext` — utility function 
@@ -140,31 +199,6 @@ Your order #{{ order.id }} has been confirmed.\n
 Best regards,\n
 {{ company.name }}
 ```
-
-## Why Use This?
-
-Django templates often produce messy whitespace because of:
-
-* Template indentation
-* Conditionals and loops
-* Readability formatting
-* Multi-line template blocks
-
-This filter lets you:
-
-* Keep templates readable
-* Avoid ugly output formatting
-* Still control exact whitespace when needed
-
-It is especially useful for plain-text emails where formatting matters.
-
-## Design Philosophy
-
-* Minimal
-* No external dependencies
-* Focused on plain text formatting
-* Safe and predictable behavior
-* Suitable for reusable Django apps
 
 ## Escaped Sequences Supported
 
