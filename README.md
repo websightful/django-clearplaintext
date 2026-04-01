@@ -1,5 +1,9 @@
 # django-clearplaintext
 
+[![PyPI version](https://img.shields.io/pypi/v/django-clearplaintext)](https://pypi.org/project/django-clearplaintext/)
+![License](https://img.shields.io/pypi/l/django-clearplaintext)
+![Python versions](https://img.shields.io/pypi/pyversions/django-clearplaintext)
+
 Provides Django template filters that normalize plain text while allowing explicit whitespace control.
 
 It collapses excessive whitespace but preserves intentional formatting using escaped sequences like `\n`, `\t`, and `\s`.
